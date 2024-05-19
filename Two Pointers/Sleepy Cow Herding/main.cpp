@@ -38,9 +38,9 @@ int main() {
                 right++;
             }
             // if there are no gaps, then right - left == n (the max value that right can be is n)
-            // in addition, locations[right] - locations[left] == n - 1
+            // this is an "exception" since right is technically out of range
+            
             // otherwise, right - left < n and locations[right] - locations[left] == n
-
             // there are locations[right] - locations[left] - 1 = n - 1 in between
             // there are right - left - 1 cows in between
             // thus, the number of empty spots is n - 1 - (right - left - 1)
