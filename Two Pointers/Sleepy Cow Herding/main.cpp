@@ -2,7 +2,6 @@
 #include <vector>
 #include <algorithm>
 #include <cstdint>
-
 using namespace std;
 
 int main() {
