@@ -19,6 +19,9 @@ int main() {
     }
     sort(array.begin(), array.end());
 
+    // to increase the medium to a certain value, we must increase the current median and every value above
+    // we can binary search on the possible target medians and see if the number of operations needed is above or below the allowed operations
+
     int low = 0, high = 2e9;
     while (low < high) {
         int mid = low + (high - low + 1) / 2;
