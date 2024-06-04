@@ -26,7 +26,7 @@ int main() {
 
     // for an assignment of gift g to cow i (which cow i prefers) to be valid
     // cow g must get a gift it prefers over gift g
-    // this can be in a cycle with more than 2 twos or directly between cows i and g
+    // this can be in a cycle with more than 2 cows or in an exchange directly between cows i and g
     // in the first case
     // every cow must prefer the gift it receives over the original
     // ex: cow i's gift -> cow j and cow j's gift -> cow g and gift g is received by cow i
