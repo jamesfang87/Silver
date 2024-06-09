@@ -32,7 +32,7 @@ int main() {
         cin >> a;
     }
 
-    long long low = 0, high = 2 * 10e5 * 10e9;
+    long long low = 0, high = 2 * 10e5 * 10e9 + 1;
     while (low < high) {
         long long mid = low + (high - low) / 2;
         if (valid(mid, array)) {
