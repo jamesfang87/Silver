@@ -11,20 +11,19 @@ int main() {
 
     int reversed_numbers[n];
     for (int i = 0; i < n; i++) {
-        reversed_numbers[i] = numbers[n - 1 - i];
+        reversed_numbers[i] = numbers[n - i - 1];
     }
 
-    int forward_gcd[n + 1]; gcd[0] = 0;
-    int reversed_gcd[n + 1]; reversed_gcd[0] = 0;
+    int prefixed_gcd[n + 1]; gcd[0] = 0;
+    int suffixed_gcd[n + 1]; reversed_gcd[0] = 0;
     for (int i = 0; i < n; i++) {
-        forward_gcd[i + 1] = __gcd(forward_gcd[i], numbers[i]);
-        reversed_gcd[i + 1] = __gcd(reversed_gcd[i], reversed_numbers[i]);
+        forward_gcd[i + 1] = __gcd(prefixed_gcd[i], numbers[i]);
+        reversed_gcd[i + 1] = __gcd(suffixed_gcd[i], reversed_numbers[i]);
     }
 
     int ans = 0;
     for (int i = 0; i < n; i++) {
-        int reversed = n - i;
-        ans = max(ans, __gcd(reverse_gcd[reversed - 1], forwawrd_gcd[i]));
+        ans = max(ans, __gcd(suffixed_gcd[n - i - 1], prefixed_gcd[i]));
     }
     cout << ans;
 }
