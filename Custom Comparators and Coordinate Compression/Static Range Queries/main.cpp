@@ -2,20 +2,15 @@
 #include <vector>
 #include <algorithm>
 
-
-// i'm using a struct cuz why tf not ykyk
 struct Range {
     int start, end, value = 0;
 };
-
 
 int compress(int i, std::vector<int> & indices) {
     return std::lower_bound(indices.begin(), indices.end(), i) - indices.begin();
 }
 
-
 int main() {
-    // get all the shit we need to do the problem
     int num_updates, num_queries;
     std::cin >> num_updates >> num_queries;
 
