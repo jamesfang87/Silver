@@ -6,7 +6,7 @@ using namespace std;
 string maze[25][25];
 bool visited[25][25][19683];
 int powers_of_3[10];
-set<int> valid_winning_states;
+set<int> valid_winning_boards;
 
 struct Board {
     int hash;
@@ -91,9 +91,9 @@ void floodfill(int r, int c, Board board) {
         // if that cell in the board is unfilled
         if (board.get(board_index) == 0) {
             board.set(board_index, new_val);
-            // insert to set of valid winning states if we haven't already
+            // insert to set of valid winning boards if we haven't already
             if (!visited[r][c][board.hash] && winning_state(board.to_vec())) {
-                valid_winning_states.insert(board.hash);
+                valid_winning_boards.insert(board.hash);
                 // bessie stops right as she wins in cow tic-tac-toe
                 return;
             }
@@ -133,5 +133,5 @@ int main() {
 
     auto cur_board = Board(0);
     floodfill(bessie_pos.first, bessie_pos.second, cur_board);
-    cout << valid_winning_states.size() << '\n';
+    cout << valid_winning_boards.size() << '\n';
 }
