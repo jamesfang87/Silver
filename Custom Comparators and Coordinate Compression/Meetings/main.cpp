@@ -7,9 +7,6 @@ struct Cow {
     // think about the collision as the cows switching weights
     // since their position is the same at a collision and they just invert directions
     // that way we can think of meetings as the swaping weights and travelling in the same direction
-    void collision(Cow other) {
-        swap(weight, other.weight);
-    }
 
     bool operator < (const Cow& other) const {
         return pos < other.pos;
@@ -53,6 +50,7 @@ int main() {
 
     // n-th right-moving cow gains the weight of the n-th most rightward cow overall
     for (int i = 0; i < right_going.size(); i++) {
+        // reverse index since right side is sorted in increasing order of position (most leftward first)
         int arrival_time = right_barn - right_going[right_going.size() - i - 1].pos;
         stopping_info.push_back({arrival_time, cows[num_cows - i - 1].weight});
     }
