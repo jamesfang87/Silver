@@ -65,6 +65,7 @@ int main() {
     long long operations_left = k;
     long long cur_min = nums[0], cur_max = nums[n - 1];
     long long l_ptr = 0, r_ptr = n; // exclusive right ptr
+    // this program is still AC without l_ptr < r_ptr but it runs faster with it
     while (l_ptr < r_ptr && operations_left > 0) {
         long long occurrences_of_min = get_occurrences_of_min(l_ptr, r_ptr, cur_min);
         long long occurrences_of_max = get_occurrences_of_max(l_ptr, r_ptr, cur_max);
@@ -99,7 +100,7 @@ int main() {
             // we can do it "implicityly" by pretending all values to the left of l_ptr = updated cur_min
 
             cur_min += can_increase_by; // update the cur_min
-            l_ptr = index; // set bounds of binary search to index of second smallest for binary search next iteration
+            l_ptr = index; // set bounds of binary search to index of prev second smallest for binary search next iteration
         } else {
             long long index = n - occurrences_of_max - 1; // index of second largest
             long long second_largest = nums[index];
@@ -111,7 +112,7 @@ int main() {
             operations_left -= occurrences_of_max * can_decrease_by; // update operations left
 
             cur_max -= can_decrease_by; // update cur_max
-            r_ptr = index; // set bounds of binary search to index of second largest for binary search next iteration
+            r_ptr = index; // set bounds of binary search to index of prev second largest for binary search next iteration
         }
 
         // debug
