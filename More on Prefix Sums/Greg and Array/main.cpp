@@ -22,7 +22,7 @@ int main() {
 
     // the amount of times each update operation is applied
     // last value is unused
-    vector<long long> num_applied(m + 1, 0);
+    vector<long long> times_applied(m + 1, 0);
     for (int i = 0; i < k; i++) {
         // apply all operations between and including first and last operation
         int first_operation, last_operation;
@@ -32,18 +32,18 @@ int main() {
         // each operation is applied
         
         // operations are 1-indexed so this differs from how difference arrays are normally set up: 
-        // num_applied[first_operation]++;
-        // num_applied[last_operation + 1]--;
-        num_applied[first_operation - 1]++;
-        num_applied[last_operation]--;
+        // times_applied[first_operation]++;
+        // times_applied[last_operation + 1]--;
+        times_applied[first_operation - 1]++;
+        times_applied[last_operation]--;
     }
     
     // we can merge the first 2 loops together and last 2 loops together
     // to make this code run faster (since we are repeating computation)
 
-    // run a prefix sums to build num_applied array
+    // run a prefix sums to build times_applied array
     for (int i = 1; i < m; i++) {
-        num_applied[i] += num_applied[i - 1];
+        times_applied[i] += times_applied[i - 1];
     }
 
     // the amount added to each element in the array
@@ -53,8 +53,8 @@ int main() {
 
         // u.left and u.right are already 0-indexed so we can keep using
         // the standard way to build a difference array
-        added[u.left] += u.amount * num_applied[i];
-        added[u.right + 1] -= u.amount * num_applied[i];
+        added[u.left] += u.amount * times_applied[i];
+        added[u.right + 1] -= u.amount * times_applied[i];
     }
 
     // run a prefix sums to build added array
