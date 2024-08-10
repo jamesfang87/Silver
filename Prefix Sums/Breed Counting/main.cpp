@@ -39,7 +39,4 @@ int main() {
         fout << sum2[upper] - sum2[lower - 1] << ' ';
         fout << sum3[upper] - sum3[lower - 1] << '\n';
     }
-
-
-
 }
