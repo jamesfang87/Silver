@@ -5,13 +5,15 @@
 #include <vector>
 using namespace std;
 
+typedef long long i64;
+
 bool solve() {
     int n; cin >> n;
-
-    int d[2 * n]; // array d described in problem statement
-    unordered_map<int, int> frequency;
+    
+    i64 d[2 * n]; // array d described in problem statement
+    unordered_map<i64, int> frequency;
     for (int i = 0; i < 2 * n; i++) {
-        int val; cin >> val;
+        i64 val; cin >> val;
         
         d[i] = val;
         frequency[val]++;
@@ -19,7 +21,7 @@ bool solve() {
     
     // each value in d[i] can only appear twice- once for a[i] and once for -1 * a[i]
     // a is also comprised of distinct integers so val exists only once
-    vector<int> unique_d;
+    vector<i64> unique_d;
     for (auto& [val, freq] : frequency) {
         if (freq != 2 || val % 2 != 0) 
             return false;
@@ -32,40 +34,21 @@ bool solve() {
     // d[n] = 2 * n * a[n] as 1 <= i <= n
     // a[n] = d[n] / 2n
 
-    // a[i - 1] = (d[i * 2 - 2] - 2 * a[i]) / (2n - 2)
+    unordered_set<i64> a; 
+    i64 last = 0;
+    for (int i = n - 1; i >= 0; i--) {
+        if ((unique_d[i] / 2 - last) % (i + 1) != 0) {
+            return false;
+        }
 
-
-    if (unique_d[n - 1] % (2 * n) != 0)
-        return false;
-    
-    int last = unique_d[n - 1] / (2 * n);
-    unordered_set<int> a = {last, -1 * last}; 
-
-    for (int i = n - 2; i >= 0; i--) {
-        if ((unique_d[i] - 2 * last) % (2 * i)) {
-
+        i64 val = (unique_d[i] / 2 - last) / (i + 1);
+        if (val <= 0) {
+            return false;
+        } else {
+            a.insert(val), a.insert(-1 * val);
+            last += val;
         }
     }
-
-
-
-
-
-    for (int i = n; i > 0; i--) {
-        if ((d[i * 2 - 1] - 2 * last) % (2 * n) != 0)
-            return false;
-
-        int val = (d[i * 2 - 2] - 2 * last) / (2 * n - 2);
-        if (val <= 0) 
-            return false;
-        
-        a.insert(val), a.insert(-1 * val);
-    }
-
-    for (int asdf : a) {
-        cout << asdf << ' ';
-    }
-    cout << '\n';
 
     // checks that we have 2 * n distinct integers
     // in the array that we generated
