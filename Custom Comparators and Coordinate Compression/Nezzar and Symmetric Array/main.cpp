@@ -9,7 +9,6 @@ typedef long long i64;
 
 bool solve() {
     int n; cin >> n;
-    
     i64 d[2 * n]; // array d described in problem statement
     unordered_map<i64, int> frequency;
     for (int i = 0; i < 2 * n; i++) {
