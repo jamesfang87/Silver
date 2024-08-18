@@ -39,6 +39,23 @@ int search(Friend& f, vector<Friend>& friends, vector<pair<Friend, Friend>>& pre
 }
 
 void solve() {
+    /*
+     * the basic idea is to sort the friends by either height or width
+     * and then use binary search to quickly split friends into two categories
+     * ones that cannot be placed in front for sure and ones that possibly could
+     * for example, if we sorted by height, we can use binary search to find
+     * the last friend whos height is less than some arbitrary h.
+     * now, the question that remains is how to find a friend with width less than
+     * some arbitrary w.
+     * one thing that we can do is maintain a prefix sum array of the smallest w
+     * 
+     * to take care of the fact that we can flip friends around, we can swap
+     * the h and w of the current friend
+     * 
+     * however, this means that in our prefix sum array, we must store the 
+     * two friends with the smallest w, since we can't put one friend in front of
+     * itself.
+     */
     int n; cin >> n;
     vector<Friend> unsorted_friends(n);
     for (int i = 0; i < n; i++) {
@@ -58,7 +75,6 @@ void solve() {
 
         prefix_mins.push_back({least_w, second_least_w});
     }
-
 
     for (auto f : unsorted_friends) {
         int result = search(f, friends, prefix_mins);
