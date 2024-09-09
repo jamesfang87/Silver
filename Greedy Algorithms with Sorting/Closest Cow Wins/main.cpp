@@ -54,6 +54,7 @@ int main() {
     // finally, we can create a vector of all the max 1 cow tastiness for each interval
     // and add (two-cow tastiness - one-cow tastiness) to simulate 
     // the choice of either putting another cow there or using that cow to claim patches in another interval
+    // we then choose the top n choices and sum them for our final answer
 
     // max amount of tastiness in each interval
     vector<long long> max_tastiness;
