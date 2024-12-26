@@ -27,10 +27,11 @@ int main() {
 
     // for all other intervals, farmer john can claim all the patches inside with two cows
     // the reasoning is similar to the first and last:
-    // given an interval (l, r), we can place cows slight to the right of l and vice versa for r
+    // given an interval (l, r), we can place cows slightly to the right of l and vice versa for r
     // that way, all patches in the interval are closer to fj's cows
 
-    // but fj doesn't always have enough cows, and we want to see how many patches he can claim with just one
+    // but fj doesn't always have enough cows to use two cows to claim patches, 
+    // and we want to see how many patches he can claim with just one cow
     // for any location q within the interval (l, r), the interval is further split into 2 sub-intervals,
     // one to the left of q and one to the right.
     // fj can claim the half of the left sub-interval closer to q and same for the right sub-interval
@@ -51,7 +52,9 @@ int main() {
     // the sum of the tastiness of all patches in the interval is the 2 cow tastiness
 
     // finally, we can create a vector of all the max 1 cow tastiness for each interval
-    // and add (two-cow tastiness - one-cow tastiness) to simulate putting another cow there
+    // and add (two-cow tastiness - one-cow tastiness) to simulate 
+    // the choice of either putting another cow there or using that cow to claim patches in another interval
+    // we then choose the top n choices and sum them for our final answer
 
     // max amount of tastiness in each interval
     vector<long long> max_tastiness;
@@ -73,6 +76,7 @@ int main() {
                 two_cow_tastiness += patches[right].second;
                 right++;
             } else {
+                // shorten the window
                 cur_tastiness -= patches[left].second;
                 left++;
             }
